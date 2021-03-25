@@ -14,7 +14,11 @@ export const errorHandler = (
   res: Response,
   _1: NextFunction
 ) => {
-  const statusCode = error.status || 500;
+  let statusCode = error.status || 500;
+  if (!error.isHttpException) {
+    error.message = "Something went wrong";
+    statusCode = 500;
+  }
   res.status(statusCode).json({
     message: error.message,
     status: statusCode,
