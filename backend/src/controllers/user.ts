@@ -4,7 +4,10 @@ import { User as UserEntity } from "../entities/User";
 import { HttpException } from "../exceptions/HttpException";
 import { hash } from "../lib/hash";
 import { createAccessToken, createRefreshToken } from "../lib/jwt";
-import { validateSignUpCredentials } from "../lib/validators/user";
+import {
+  validateLoginCredentials,
+  validateSignUpCredentials,
+} from "../lib/validators/user";
 
 interface Tokens {
   refreshToken: string;
@@ -51,6 +54,7 @@ export class User {
   }
 
   public static async login(credentials: LoginCredentials): Promise<Tokens> {
+    await validateLoginCredentials(credentials);
     const isEmailUnique = await this.isEmailUnique(credentials.email);
     if (isEmailUnique) {
       throw new HttpException("Invalid credentials", 401);
