@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const createAccessToken = (userId: number) => {
+export const createAccessToken = (userId: number): Promise<string> => {
   return new Promise((resolve, rejects) => {
     jwt.sign(
       {
@@ -21,7 +21,7 @@ export const createAccessToken = (userId: number) => {
   });
 };
 
-export const createRefreshToken = (userId: number): Promise<String> => {
+export const createRefreshToken = (userId: number): Promise<string> => {
   return new Promise((resolve, rejects) => {
     jwt.sign(
       {
