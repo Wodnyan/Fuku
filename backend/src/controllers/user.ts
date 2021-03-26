@@ -1,11 +1,18 @@
 import { getRepository } from "typeorm";
 import { User as UserEntity } from "../entities/User";
 import { HttpException } from "../exceptions/HttpException";
+import { createAccessToken, createRefreshToken } from "../lib/jwt";
 
 interface Tokens {
   refreshToken: string;
   accessToken: string;
 }
+
+// interface LoginCredentials {
+//   username: string;
+//   password: string;
+//   email: string;
+// }
 
 interface RegisterCredentials {
   username: string;
@@ -30,11 +37,11 @@ export class User {
       throw new HttpException("Username is taken", 409);
     }
     const user = await User.userRepository().save(credentials);
-    console.log(user);
-    // TODO: Create refresh and access tokens
+    const accessToken = await createAccessToken(user.id);
+    const refreshToken = await createRefreshToken(user.id);
     return {
-      accessToken: "fjklsajflka",
-      refreshToken: "fjaslfjalksf",
+      accessToken,
+      refreshToken,
     };
   }
 
@@ -44,7 +51,7 @@ export class User {
         username,
       },
     });
-    return user === null;
+    return user === undefined;
   }
 
   public static async isEmailUnique(email: string) {
@@ -53,6 +60,6 @@ export class User {
         email,
       },
     });
-    return user === null;
+    return user === undefined;
   }
 }

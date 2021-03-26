@@ -3,7 +3,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import { CodeReview } from "./CodeReview";
 
 @Entity()
 export class User {
@@ -45,4 +47,7 @@ export class User {
     nullable: true,
   })
   password?: string;
+
+  @OneToMany(() => CodeReview, (codeReview: CodeReview) => codeReview.user)
+  codeReviews!: CodeReview[];
 }

@@ -8,9 +8,9 @@ export const register = async (
 ) => {
   try {
     const { refreshToken, accessToken } = await User.register(req.body);
-    console.log(refreshToken, accessToken);
-    res.json({
-      message: "register",
+    res.cookie("refresh_token", refreshToken);
+    res.status(201).json({
+      accessToken,
     });
   } catch (error) {
     next(error);
