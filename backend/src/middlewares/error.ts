@@ -22,6 +22,7 @@ export const errorHandler = (
   res.status(statusCode).json({
     message: error.message,
     status: statusCode,
+    errors: error.options?.errors,
     stack: __prod__ ? undefined : error.stack,
   });
 };

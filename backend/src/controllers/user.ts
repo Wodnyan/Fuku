@@ -4,6 +4,7 @@ import { User as UserEntity } from "../entities/User";
 import { HttpException } from "../exceptions/HttpException";
 import { hash } from "../lib/hash";
 import { createAccessToken, createRefreshToken } from "../lib/jwt";
+import { validateSignUpCredentials } from "../lib/validators/user";
 
 interface Tokens {
   refreshToken: string;
@@ -29,6 +30,7 @@ export class User {
   public static async register(
     credentials: RegisterCredentials
   ): Promise<Tokens> {
+    await validateSignUpCredentials(credentials);
     const uniqueEmail = await this.isEmailUnique(credentials.email);
     const uniqueUsername = await this.isUsernameUnique(credentials.username);
     if (!uniqueEmail) {
