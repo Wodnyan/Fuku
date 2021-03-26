@@ -1,10 +1,18 @@
+import { compare } from "bcrypt";
 import { getRepository } from "typeorm";
 import { User as UserEntity } from "../entities/User";
 import { HttpException } from "../exceptions/HttpException";
+import { hash } from "../lib/hash";
+import { createAccessToken, createRefreshToken } from "../lib/jwt";
 
 interface Tokens {
   refreshToken: string;
   accessToken: string;
+}
+
+interface LoginCredentials {
+  password: string;
+  email: string;
 }
 
 interface RegisterCredentials {
@@ -21,38 +29,65 @@ export class User {
   public static async register(
     credentials: RegisterCredentials
   ): Promise<Tokens> {
-    const uniqueEmail = await User.isEmailUnique(credentials.email);
-    const uniqueUsername = await User.isUsernameUnique(credentials.username);
+    const uniqueEmail = await this.isEmailUnique(credentials.email);
+    const uniqueUsername = await this.isUsernameUnique(credentials.username);
     if (!uniqueEmail) {
       throw new HttpException("Email is taken", 409);
     }
     if (!uniqueUsername) {
       throw new HttpException("Username is taken", 409);
     }
-    const user = await User.userRepository().save(credentials);
-    console.log(user);
-    // TODO: Create refresh and access tokens
+    const hashedPassword = await hash(credentials.password);
+    credentials.password = hashedPassword;
+    const user = await this.userRepository().save(credentials);
+    const accessToken = await createAccessToken(user.id);
+    const refreshToken = await createRefreshToken(user.id);
     return {
-      accessToken: "fjklsajflka",
-      refreshToken: "fjaslfjalksf",
+      accessToken,
+      refreshToken,
+    };
+  }
+
+  public static async login(credentials: LoginCredentials): Promise<Tokens> {
+    const isEmailUnique = await this.isEmailUnique(credentials.email);
+    if (isEmailUnique) {
+      throw new HttpException("Invalid credentials", 401);
+    }
+    const user = await this.userRepository().findOne({
+      where: {
+        email: credentials.email,
+      },
+    });
+    const isPasswordCorrect = await compare(
+      credentials.password,
+      user?.password!
+    );
+    if (!isPasswordCorrect) {
+      throw new HttpException("Invalid credentials", 401);
+    }
+    const accessToken = await createAccessToken(user!.id);
+    const refreshToken = await createRefreshToken(user!.id);
+    return {
+      accessToken,
+      refreshToken,
     };
   }
 
   public static async isUsernameUnique(username: string) {
-    const user = await User.userRepository().findOne({
+    const user = await this.userRepository().findOne({
       where: {
         username,
       },
     });
-    return user === null;
+    return user === undefined;
   }
 
   public static async isEmailUnique(email: string) {
-    const user = await User.userRepository().findOne({
+    const user = await this.userRepository().findOne({
       where: {
         email,
       },
     });
-    return user === null;
+    return user === undefined;
   }
 }

@@ -8,9 +8,29 @@ export const register = async (
 ) => {
   try {
     const { refreshToken, accessToken } = await User.register(req.body);
-    console.log(refreshToken, accessToken);
+    res.cookie("refresh_token", refreshToken, {
+      httpOnly: true,
+    });
+    res.status(201).json({
+      accessToken,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { accessToken, refreshToken } = await User.login(req.body);
+    res.cookie("refresh_token", refreshToken, {
+      httpOnly: true,
+    });
     res.json({
-      message: "register",
+      accessToken,
     });
   } catch (error) {
     next(error);
