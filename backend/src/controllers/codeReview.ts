@@ -67,8 +67,4 @@ export class CodeReview {
     }
     return this.codeReviewRepository().delete(id);
   }
-
-  static async update() {
-    return "Hello world";
-  }
 }

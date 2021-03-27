@@ -17,6 +17,4 @@ router.get("/:codeReviewId", protectRoute, getOneCodeReview);
 
 router.delete("/:codeReviewId", protectRoute, deleteCodeReview);
 
-router.patch("/:codeReviewId");
-
 export default router;
