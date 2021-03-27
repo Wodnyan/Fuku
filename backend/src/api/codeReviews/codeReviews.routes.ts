@@ -1,8 +1,17 @@
 import { Router } from "express";
-import { postCodeReview } from "./codeReviews.controller";
+import { protectRoute } from "../../middlewares/auth";
+import { getAllCodeReviews, postCodeReview } from "./codeReviews.controller";
 
 const router = Router();
 
-router.post("/", postCodeReview);
+router.post("/", protectRoute, postCodeReview);
+
+router.get("/", getAllCodeReviews);
+
+router.get("/:id");
+
+router.delete("/:id");
+
+router.patch("/:id");
 
 export default router;
