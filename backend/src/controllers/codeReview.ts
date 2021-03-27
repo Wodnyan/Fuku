@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { CodeReview as CodeReviewEntity } from "../entities/CodeReview";
+import { HttpException } from "../exceptions/HttpException";
 import { validateInsertCodeReview } from "../lib/validators/codeReview";
 import { User } from "./user";
 
@@ -44,8 +45,19 @@ export class CodeReview {
     return codeReviews;
   }
 
-  static async getOne() {
-    return "Hello world";
+  static async getOne(id: number) {
+    const codeReview = await this.codeReviewRepository()
+      .createQueryBuilder("code_reviews")
+      .where({
+        id,
+      })
+      .leftJoinAndSelect("code_reviews.user", "user")
+      .select(this.select)
+      .getOne();
+    if (!codeReview) {
+      throw new HttpException("No Code Review Found", 404);
+    }
+    return codeReview;
   }
 
   static async delete() {

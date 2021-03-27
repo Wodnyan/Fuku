@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { protectRoute } from "../../middlewares/auth";
-import { getAllCodeReviews, postCodeReview } from "./codeReviews.controller";
+import {
+  getAllCodeReviews,
+  getOneCodeReview,
+  postCodeReview,
+} from "./codeReviews.controller";
 
 const router = Router();
 
@@ -8,10 +12,11 @@ router.post("/", protectRoute, postCodeReview);
 
 router.get("/", getAllCodeReviews);
 
-router.get("/:id");
+// TODO: Protect Route
+router.get("/:codeReviewId", protectRoute, getOneCodeReview);
 
-router.delete("/:id");
+router.delete("/:codeReviewId");
 
-router.patch("/:id");
+router.patch("/:codeReviewId");
 
 export default router;

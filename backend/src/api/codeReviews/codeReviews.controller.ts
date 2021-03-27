@@ -34,3 +34,19 @@ export const getAllCodeReviews = async (
     next(error);
   }
 };
+
+export const getOneCodeReview = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { codeReviewId } = req.params;
+    const codeReview = await CodeReview.getOne(Number(codeReviewId));
+    res.json({
+      codeReview,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
