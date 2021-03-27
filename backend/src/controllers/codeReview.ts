@@ -60,8 +60,12 @@ export class CodeReview {
     return codeReview;
   }
 
-  static async delete() {
-    return "Hello world";
+  static async delete(id: number, userId: number) {
+    const codeReview = await this.getOne(id);
+    if (codeReview.user.id !== userId) {
+      throw new HttpException("Unauthorized", 401);
+    }
+    return this.codeReviewRepository().delete(id);
   }
 
   static async update() {

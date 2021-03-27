@@ -50,3 +50,20 @@ export const getOneCodeReview = async (
     next(error);
   }
 };
+
+export const deleteCodeReview = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { codeReviewId } = req.params;
+    const { id: userId } = req.user as CustomRequestUser;
+    await CodeReview.delete(Number(codeReviewId), userId);
+    res.status(204).json({
+      message: "No content",
+    });
+  } catch (error) {
+    next(error);
+  }
+};

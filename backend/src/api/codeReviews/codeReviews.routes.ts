@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { protectRoute } from "../../middlewares/auth";
 import {
+  deleteCodeReview,
   getAllCodeReviews,
   getOneCodeReview,
   postCodeReview,
@@ -12,10 +13,9 @@ router.post("/", protectRoute, postCodeReview);
 
 router.get("/", getAllCodeReviews);
 
-// TODO: Protect Route
 router.get("/:codeReviewId", protectRoute, getOneCodeReview);
 
-router.delete("/:codeReviewId");
+router.delete("/:codeReviewId", protectRoute, deleteCodeReview);
 
 router.patch("/:codeReviewId");
 
