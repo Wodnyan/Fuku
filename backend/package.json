@@ -19,6 +19,7 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "passport": "^0.4.1",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31",
@@ -31,6 +32,7 @@
     "@types/jsonwebtoken": "^8.5.1",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.35",
+    "@types/passport": "^1.0.6",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.7"
   }

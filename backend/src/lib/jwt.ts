@@ -39,7 +39,7 @@ export const createRefreshToken = (userId: number): Promise<string> => {
   });
 };
 
-export const validateAccessToken = (token: string) => {
+export const validateAccessToken = (token: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!, (err, payload) => {
       if (err) return reject(err);
@@ -48,7 +48,7 @@ export const validateAccessToken = (token: string) => {
   });
 };
 
-export const validateRefreshToken = (token: string) => {
+export const validateRefreshToken = (token: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET!, (err, payload) => {
       if (err) return reject(err);
