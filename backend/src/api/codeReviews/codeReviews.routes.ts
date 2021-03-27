@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { validateCodeReviewRouteParamIdMiddleware } from "../../lib/validators/codeReview";
 import { protectRoute } from "../../middlewares/auth";
 import {
   deleteCodeReview,
@@ -13,8 +14,18 @@ router.post("/", protectRoute, postCodeReview);
 
 router.get("/", getAllCodeReviews);
 
-router.get("/:codeReviewId", protectRoute, getOneCodeReview);
+router.get(
+  "/:codeReviewId",
+  validateCodeReviewRouteParamIdMiddleware,
+  protectRoute,
+  getOneCodeReview
+);
 
-router.delete("/:codeReviewId", protectRoute, deleteCodeReview);
+router.delete(
+  "/:codeReviewId",
+  validateCodeReviewRouteParamIdMiddleware,
+  protectRoute,
+  deleteCodeReview
+);
 
 export default router;
