@@ -1,5 +1,22 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../../controllers/user";
+import { CustomRequestUser } from "../../types";
+
+export const getOneUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.user as CustomRequestUser;
+    const user = await User.getOne(id);
+    res.json({
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const register = async (
   req: Request,

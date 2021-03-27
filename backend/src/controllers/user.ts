@@ -26,6 +26,15 @@ interface RegisterCredentials {
 }
 
 export class User {
+  static readonly select = [
+    "username",
+    "id",
+    "createdAt",
+    "updatedAt",
+    "email",
+    "avatarUrl",
+  ] as (keyof UserEntity)[];
+
   static userRepository() {
     return getRepository(UserEntity);
   }
@@ -77,6 +86,16 @@ export class User {
       accessToken,
       refreshToken,
     };
+  }
+
+  public static async getOne(userId: number) {
+    const user = await this.userRepository().findOne({
+      where: {
+        id: userId,
+      },
+      select: this.select,
+    });
+    return user;
   }
 
   public static async isUsernameUnique(username: string) {
