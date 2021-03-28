@@ -1,0 +1,55 @@
+main.container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .hero {
+    text-align: center;
+    position: relative;
+    z-index: 20;
+    h1 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 2rem;
+    }
+  }
+  .box {
+    position: absolute;
+    background: var(--color-beta);
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    &--1 {
+      top: 40%;
+      left: 55%;
+      background: var(--color-delta);
+      animation: float 2000ms ease infinite alternate;
+      z-index: 10;
+    }
+    &--2 {
+      top: 50%;
+      left: 60%;
+      background: var(--color-echo);
+      animation: float 1800ms ease infinite alternate;
+      z-index: 11;
+    }
+    &--3 {
+      top: 45%;
+      left: 40%;
+      background: var(--color-charlie);
+      animation: float 1900ms ease infinite alternate;
+      z-index: 10;
+    }
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-50%, -40%);
+  }
+}
