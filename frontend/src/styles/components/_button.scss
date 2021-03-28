@@ -1,0 +1,15 @@
+.btn {
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  text-decoration: none;
+  color: var(--color-text);
+  background: var(--color-delta);
+  transition: background 0.2s ease;
+  cursor: pointer;
+  &--secondary {
+    color: var(--color-text);
+    background: var(--color-echo);
+  }
+}
