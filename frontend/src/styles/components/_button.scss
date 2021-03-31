@@ -8,8 +8,14 @@
   background: var(--color-delta);
   transition: background 0.2s ease;
   cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
   &--secondary {
     color: var(--color-text);
     background: var(--color-echo);
+  }
+  &--full {
+    width: 100%;
+    display: block;
   }
 }

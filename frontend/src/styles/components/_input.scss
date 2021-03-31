@@ -1,0 +1,14 @@
+input {
+  display: block;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  transition: box-shadow 0.2s ease, border 0.2s ease;
+  background: #fff;
+  &:focus {
+    border-color: var(--color-delta);
+    box-shadow: 0px 0px 1px 5px var(--color-delta);
+  }
+}
