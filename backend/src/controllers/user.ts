@@ -25,6 +25,12 @@ interface RegisterCredentials {
   email: string;
 }
 
+interface OAuthRegisterCredentials {
+  username: string;
+  email: string;
+  avatar?: string;
+}
+
 export class User {
   static readonly select = [
     "username",
@@ -62,6 +68,18 @@ export class User {
     };
   }
 
+  public static async oauthRegister(credentials: OAuthRegisterCredentials) {
+    const user = await this.userRepository().save({
+      email: credentials.email,
+      username: credentials.username,
+      avatarUrl: credentials.avatar,
+    });
+    const refreshToken = await createRefreshToken(user.id);
+    return {
+      refreshToken,
+    };
+  }
+
   public static async login(credentials: LoginCredentials): Promise<Tokens> {
     await validateLoginCredentials(credentials);
     const isEmailUnique = await this.isEmailUnique(credentials.email);
@@ -94,6 +112,15 @@ export class User {
         id: userId,
       },
       select: this.select,
+    });
+    return user;
+  }
+
+  public static async getOneByEmail(email: string) {
+    const user = await this.userRepository().findOne({
+      where: {
+        email,
+      },
     });
     return user;
   }

@@ -15,6 +15,7 @@ export const errorHandler = (
   _1: NextFunction
 ) => {
   let statusCode = error.status || 500;
+  console.log(error);
   if (!error.isHttpException) {
     error.message = "Something went wrong";
     statusCode = 500;

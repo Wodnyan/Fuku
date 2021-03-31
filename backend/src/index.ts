@@ -10,6 +10,7 @@ import { checkAuth } from "./middlewares/auth";
 import api from "./api/";
 import passport from "passport";
 import cors from "cors";
+import passportSetup from "./passport";
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ const PORT = process.env.PORT || 5050;
 
 // Database setup
 createConnection(connectionConfig);
+
+passportSetup();
 
 // Middleware
 app.use(passport.initialize());
