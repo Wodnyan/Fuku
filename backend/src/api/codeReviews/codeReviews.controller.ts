@@ -2,6 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import { CodeReview } from "../../controllers/codeReview";
 import { CustomRequestUser } from "../../types";
 
+interface CodeReviewQueryParams {
+  limit?: number;
+  offset?: number;
+  orderBy?: "asc" | "desc";
+}
+
 export const postCodeReview = async (
   req: Request,
   res: Response,
@@ -20,12 +26,17 @@ export const postCodeReview = async (
 };
 
 export const getAllCodeReviews = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const codeReviews = await CodeReview.getAll();
+    const { limit, offset, orderBy } = req.query as CodeReviewQueryParams;
+    const codeReviews = await CodeReview.getAll({
+      limit,
+      offset,
+      orderBy,
+    });
     res.json({
       codeReviews,
     });

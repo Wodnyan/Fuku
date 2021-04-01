@@ -9,6 +9,12 @@ interface InsertData {
   description: string;
 }
 
+interface Options {
+  offset?: number;
+  limit?: number;
+  orderBy?: "asc" | "desc";
+}
+
 const userSelect = User.select.map((select) => `user.${select}`);
 
 export class CodeReview {
@@ -36,11 +42,17 @@ export class CodeReview {
     return codeReview;
   }
 
-  static async getAll() {
+  static async getAll(options?: Options) {
     const codeReviews = await this.codeReviewRepository()
       .createQueryBuilder("code_reviews")
       .leftJoinAndSelect("code_reviews.user", "user")
       .select(this.select)
+      .limit(options?.limit || undefined)
+      .skip(options?.offset || undefined)
+      .orderBy(
+        "code_reviews.createdAt",
+        options?.orderBy === "asc" ? "ASC" : "DESC"
+      )
       .getMany();
     return codeReviews;
   }
