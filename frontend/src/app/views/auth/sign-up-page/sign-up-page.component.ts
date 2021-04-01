@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth/auth.service";
 
 type Input = "username" | "email" | "password";
@@ -40,7 +41,7 @@ export class SignUpPageComponent implements OnInit {
     { input: "email", errors: null },
   ];
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   public get username() {
     return this.credentials.get("username");
@@ -70,8 +71,9 @@ export class SignUpPageComponent implements OnInit {
     ];
     if (this.isErrorsEmpty()) {
       this.auth.signUp(this.credentials.value).subscribe(
-        (data) => {
-          console.log(data);
+        ({ accessToken }) => {
+          localStorage.setItem("accessToken", accessToken);
+          this.router.navigate(["/"]);
         },
         ({ error }) => {
           const isEmailInvalid = error.errors?.some((error: string) => {
