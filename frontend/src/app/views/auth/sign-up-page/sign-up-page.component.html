@@ -9,9 +9,13 @@
     <div class="mb-2">
       <label>Username</label>
       <input formControlName="username" placeholder="Username" type="text" />
-      <div *ngIf="getErrors('username').required">Username is required.</div>
-      <div *ngIf="getErrors('username').notUnique">Username is taken</div>
-      <div *ngIf="getErrors('username').maxlength">
+      <div class="error" *ngIf="getErrors('username').required">
+        Username is required.
+      </div>
+      <div class="error" *ngIf="getErrors('username').notUnique">
+        Username is taken
+      </div>
+      <div class="error" *ngIf="getErrors('username').maxlength">
         Username can't be longer than {{
         getErrors("username").maxlength.requiredLength }} characters.
       </div>
@@ -19,10 +23,16 @@
     <div class="mb-2">
       <label>Email</label>
       <input formControlName="email" placeholder="Email" type="email" />
-      <div *ngIf="getErrors('email').required">Email is required.</div>
-      <div *ngIf="getErrors('email').pattern">Needs to be a valid email</div>
-      <div *ngIf="getErrors('email').notUnique">Email is taken</div>
-      <div *ngIf="getErrors('email').maxlength">
+      <div class="error" *ngIf="getErrors('email').required">
+        Email is required.
+      </div>
+      <div class="error" *ngIf="getErrors('email').pattern">
+        Needs to be a valid email
+      </div>
+      <div class="error" *ngIf="getErrors('email').notUnique">
+        Email is taken
+      </div>
+      <div class="error" *ngIf="getErrors('email').maxlength">
         Email can't be longer than {{
         getErrors("email").maxlength.requiredLength }} characters.
       </div>
@@ -34,8 +44,10 @@
         placeholder="Password"
         type="password"
       />
-      <div *ngIf="getErrors('password').required">Password is required.</div>
-      <div *ngIf="getErrors('password').maxlength">
+      <div class="error" *ngIf="getErrors('password').required">
+        Password is required.
+      </div>
+      <div class="error" *ngIf="getErrors('password').maxlength">
         Password can't be longer than {{
         getErrors("password").maxlength.requiredLength }} characters.
       </div>
