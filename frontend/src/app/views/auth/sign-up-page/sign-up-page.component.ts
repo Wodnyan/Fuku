@@ -69,6 +69,7 @@ export class SignUpPageComponent implements OnInit {
       { input: "username", errors: this.username.errors },
       { input: "email", errors: this.email.errors },
     ];
+    console.log(this.credentials.value);
     if (this.isErrorsEmpty()) {
       this.auth.signUp(this.credentials.value).subscribe(
         ({ accessToken }) => {

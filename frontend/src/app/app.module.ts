@@ -7,9 +7,10 @@ import { AppComponent } from "./app.component";
 import { LandingPageComponent } from "./views/landing-page/landing-page.component";
 import { SignUpPageComponent } from "./views/auth/sign-up-page/sign-up-page.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { PasswordInputComponent } from './components/password-input/password-input.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, SignUpPageComponent],
+  declarations: [AppComponent, LandingPageComponent, SignUpPageComponent, PasswordInputComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
