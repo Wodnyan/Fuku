@@ -6,6 +6,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { CodeReview } from "./CodeReview";
+import { Room } from "./Room";
 
 @Entity()
 export class User {
@@ -50,4 +51,7 @@ export class User {
 
   @OneToMany(() => CodeReview, (codeReview: CodeReview) => codeReview.user)
   codeReviews!: CodeReview[];
+
+  @OneToMany(() => Room, (room: Room) => room.user)
+  rooms!: Room[];
 }

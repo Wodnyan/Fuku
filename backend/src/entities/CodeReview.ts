@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Room } from "./Room";
 import { User } from "./User";
 
 @Entity()
@@ -18,8 +19,11 @@ export class CodeReview {
   @Column()
   description!: string;
 
-  @ManyToOne(() => User, (user) => user.codeReviews)
+  @ManyToOne(() => User, (user: User) => user.codeReviews)
   user!: User;
+
+  @ManyToOne(() => Room, (room) => room.codeReviews)
+  room!: Room;
 
   @Column({
     type: "timestamp with time zone",

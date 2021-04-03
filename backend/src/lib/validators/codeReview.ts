@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import joi from "joi";
-import { HttpException } from "../../exceptions/HttpException";
+import { validateSchemaAsync } from "./validator";
 
 const insertCodeReviewSchema = joi.object({
   description: joi.string().required(),
@@ -11,31 +11,11 @@ const routeParamIdSchema = joi.object({
   codeReviewIdParam: joi.number().integer().positive(),
 });
 
-export const validateInsertCodeReview = async (payload: any) => {
-  try {
-    return await insertCodeReviewSchema.validateAsync(payload, {
-      abortEarly: false,
-    });
-  } catch (error) {
-    const errors = error.details.map((detail: any) => detail.message);
-    throw new HttpException(error.name, 400, {
-      errors,
-    });
-  }
-};
+export const validateInsertCodeReview = async (payload: any) =>
+  await validateSchemaAsync(insertCodeReviewSchema, payload);
 
-export const validateRouteParamId = async (payload: any) => {
-  try {
-    return await routeParamIdSchema.validateAsync(payload, {
-      abortEarly: false,
-    });
-  } catch (error) {
-    const errors = error.details.map((detail: any) => detail.message);
-    throw new HttpException(error.name, 400, {
-      errors,
-    });
-  }
-};
+export const validateRouteParamId = async (payload: any) =>
+  await validateSchemaAsync(routeParamIdSchema, payload);
 
 export const validateCodeReviewRouteParamIdMiddleware = async (
   req: Request,

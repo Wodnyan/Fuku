@@ -1,5 +1,5 @@
 import joi from "joi";
-import { HttpException } from "../../exceptions/HttpException";
+import { validateSchemaAsync } from "./validator";
 
 const loginSchema = joi.object({
   email: joi.string().email().max(320).required(),
@@ -12,28 +12,8 @@ const signUpSchema = joi.object({
   password: joi.string().max(120).required(),
 });
 
-export const validateSignUpCredentials = async (credentials: any) => {
-  try {
-    return await signUpSchema.validateAsync(credentials, {
-      abortEarly: false,
-    });
-  } catch (error) {
-    const errors = error.details.map((detail: any) => detail.message);
-    throw new HttpException(error.name, 400, {
-      errors,
-    });
-  }
-};
+export const validateSignUpCredentials = async (credentials: any) =>
+  await validateSchemaAsync(signUpSchema, credentials);
 
-export const validateLoginCredentials = async (credentials: any) => {
-  try {
-    return await loginSchema.validateAsync(credentials, {
-      abortEarly: false,
-    });
-  } catch (error) {
-    const errors = error.details.map((detail: any) => detail.message);
-    throw new HttpException(error.name, 400, {
-      errors,
-    });
-  }
-};
+export const validateLoginCredentials = async (credentials: any) =>
+  await validateSchemaAsync(loginSchema, credentials);

@@ -1,42 +1,72 @@
-<div>
-  <h1>Sign Up!</h1>
-</div>
-<a class="btn" href="http://localhost:5050/api/v1/oauth/github"
-  >Log in with Github</a
->
-<form (ngSubmit)="onSubmit()" [formGroup]="credentials">
-  <div>
-    <label>Username</label>
-    <input formControlName="username" placeholder="username" type="text" />
-    <div *ngIf="getErrors('username').required">Username is required.</div>
-    <div *ngIf="getErrors('username').notUnique">Username is taken</div>
-    <div *ngIf="getErrors('username').maxlength">
-      Username can't be longer than
-      {{ getErrors("username").maxlength.requiredLength }} characters.
+<main class="container">
+  <section class="top">
+    <h1>Sign Up!</h1>
+    <a class="btn btn--full" href="http://localhost:5050/api/v1/oauth/github"
+      >Log in with Github</a
+    >
+  </section>
+  <form (ngSubmit)="onSubmit()" [formGroup]="credentials">
+    <div class="mb-2">
+      <label for="username">Username</label>
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input
+          id="username"
+          formControlName="username"
+          placeholder="Username"
+          type="text"
+        />
+      </div>
+      <div class="error" *ngIf="getErrors('username').required">
+        Username is required.
+      </div>
+      <div class="error" *ngIf="getErrors('username').notUnique">
+        Username is taken
+      </div>
+      <div class="error" *ngIf="getErrors('username').maxlength">
+        Username can't be longer than
+        {{ getErrors("username").maxlength.requiredLength }} characters.
+      </div>
     </div>
-  </div>
-  <div>
-    <label>Email</label>
-    <input formControlName="email" placeholder="email" type="email" />
-    <div *ngIf="getErrors('email').required">Email is required.</div>
-    <div *ngIf="getErrors('email').pattern">Needs to be a valid email</div>
-    <div *ngIf="getErrors('email').notUnique">Email is taken</div>
-    <div *ngIf="getErrors('email').maxlength">
-      Email can't be longer than
-      {{ getErrors("email").maxlength.requiredLength }}
-      characters.
+    <div class="mb-2">
+      <label for="email">Email</label>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input
+          id="email"
+          formControlName="email"
+          placeholder="Email"
+          type="email"
+        />
+      </div>
+      <div class="error" *ngIf="getErrors('email').required">
+        Email is required.
+      </div>
+      <div class="error" *ngIf="getErrors('email').pattern">
+        Needs to be a valid email
+      </div>
+      <div class="error" *ngIf="getErrors('email').notUnique">
+        Email is taken
+      </div>
+      <div class="error" *ngIf="getErrors('email').maxlength">
+        Email can't be longer than
+        {{ getErrors("email").maxlength.requiredLength }} characters.
+      </div>
     </div>
-  </div>
-  <div>
-    <label>Password</label>
-    <input formControlName="password" placeholder="password" type="password" />
-    <div *ngIf="getErrors('password').required">Password is required.</div>
-    <div *ngIf="getErrors('password').maxlength">
-      Password can't be longer than
-      {{ getErrors("password").maxlength.requiredLength }} characters.
+    <div class="mb-2">
+      <app-password-input
+        password="password"
+        [errors]="getErrors('password')"
+        [formGroup]="credentials"
+      >
+      </app-password-input>
     </div>
-  </div>
-  <div>
-    <button class="btn" type="submit">Sign Up!</button>
-  </div>
-</form>
+    <div class="bottom">
+      <span>
+        Already have an account?
+        <a routerLink="/auth/login">Log in!</a>
+      </span>
+      <button class="btn" type="submit">Sign Up!</button>
+    </div>
+  </form>
+</main>
