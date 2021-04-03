@@ -4,6 +4,8 @@ import { FRONTEND_URL } from "../../constants";
 
 const router = Router();
 
+const SUCCESS_REDIRECT = `${FRONTEND_URL}/rooms`;
+
 router.get(
   "/github",
   passport.authenticate("github", {
@@ -14,7 +16,7 @@ router.get("/github/callback", (req, res, next) =>
   passport.authenticate(
     "github",
     {
-      successRedirect: FRONTEND_URL,
+      successRedirect: SUCCESS_REDIRECT,
       failureRedirect: `${FRONTEND_URL}/auth/sign-up`,
       session: false,
     },
@@ -23,7 +25,7 @@ router.get("/github/callback", (req, res, next) =>
       res.cookie("refresh_token", refreshToken, {
         httpOnly: true,
       });
-      res.redirect(FRONTEND_URL!);
+      res.redirect(SUCCESS_REDIRECT);
     }
   )(req, res)
 );
