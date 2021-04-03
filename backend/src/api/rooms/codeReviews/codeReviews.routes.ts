@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { validateCodeReviewRouteParamIdMiddleware } from "../../lib/validators/codeReview";
-import { protectRoute } from "../../middlewares/auth";
+import { validateCodeReviewRouteParamIdMiddleware } from "../../../lib/validators/codeReview";
+import { protectRoute } from "../../../middlewares/auth";
 import {
   deleteCodeReview,
   getAllCodeReviews,
@@ -8,7 +8,9 @@ import {
   postCodeReview,
 } from "./codeReviews.controller";
 
-const router = Router();
+const router = Router({
+  mergeParams: true,
+});
 
 router.post("/", protectRoute, postCodeReview);
 

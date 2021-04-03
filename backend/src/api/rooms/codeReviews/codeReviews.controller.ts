@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { CodeReview } from "../../controllers/codeReview";
-import { CustomRequestUser } from "../../types";
+import { CodeReview } from "../../../controllers/codeReview";
+import { CustomRequestUser } from "../../../types";
 
 interface CodeReviewQueryParams {
   limit?: number;
@@ -15,7 +15,8 @@ export const postCodeReview = async (
 ) => {
   try {
     const { id } = req.user as CustomRequestUser;
-    const newCodeReview = await CodeReview.insert(req.body, id);
+    const { roomId } = req.params;
+    const newCodeReview = await CodeReview.insert(req.body, id, Number(roomId));
     // TODO: Query the new code review
     res.status(201).json({
       codeReview: newCodeReview,

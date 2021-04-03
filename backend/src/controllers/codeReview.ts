@@ -13,6 +13,7 @@ interface Options {
   offset?: number;
   limit?: number;
   orderBy?: "asc" | "desc";
+  // TODO: Add room id
 }
 
 const userSelect = User.select.map((select) => `user.${select}`);
@@ -30,12 +31,15 @@ export class CodeReview {
     return getRepository(CodeReviewEntity);
   }
 
-  static async insert(data: InsertData, userId: number) {
+  static async insert(data: InsertData, userId: number, roomId: number) {
     await validateInsertCodeReview(data);
     const codeReview = await this.codeReviewRepository().insert({
       code: data.code,
       user: {
         id: userId,
+      },
+      room: {
+        id: roomId,
       },
       description: data.description,
     });
