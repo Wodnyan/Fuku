@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ACCESS_TOKEN, API_V1_ENDPOINT } from "src/constants";
+import { API_V1_ENDPOINT } from "src/constants";
 
 interface RoomDetails {
   name: string;
@@ -25,10 +25,9 @@ export class RoomsService {
   }
 
   postRoom(roomDetails: RoomDetails): Observable<any> {
-    console.log(ACCESS_TOKEN);
     return this.http.post(this.API_ENDPOINT, roomDetails, {
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
   }

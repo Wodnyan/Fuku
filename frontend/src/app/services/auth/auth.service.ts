@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { API_V1_ENDPOINT } from "src/constants";
 import { Tokens, User } from "../../../types";
-import { ACCESS_TOKEN } from "../../../constants";
 
 interface SignUpCredentials {
   username: string;
@@ -32,7 +31,7 @@ export class AuthService {
   getUserInfo(): Observable<{ user?: User }> {
     return this.http.get(`${API_V1_ENDPOINT}/users/auth/check`, {
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
   }
