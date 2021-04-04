@@ -13,7 +13,6 @@ interface Options {
   offset?: number;
   limit?: number;
   orderBy?: "asc" | "desc";
-  // TODO: Add room id
 }
 
 const userSelect = User.select.map((select) => `user.${select}`);

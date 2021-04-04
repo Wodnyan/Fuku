@@ -1,0 +1,22 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="roomDetails">
+  <div>
+    <label for="name"> Name </label>
+    <div class="input-group">
+      <i class="fas fa-heading"></i>
+      <input formControlName="name" id="name" type="text" class="input" />
+    </div>
+  </div>
+  <div>
+    <label for="code"> Code </label>
+    <div class="input-group">
+      <i class="fas fa-code"></i>
+      <textarea
+        formControlName="code"
+        id="code"
+        type="text"
+        class="input"
+      ></textarea>
+    </div>
+  </div>
+  <button class="btn btn--full mt-4">Create Room!</button>
+</form>

@@ -1,22 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
-import { HttpException } from "../../exceptions/HttpException";
+import { validateSchemaAsync } from "./validator";
 
 const routeParamIdSchema = Joi.object({
   roomIdParam: Joi.number().integer(),
 });
 
 export const validateRouteParamId = async (payload: any) => {
-  try {
-    return await routeParamIdSchema.validateAsync(payload, {
-      abortEarly: false,
-    });
-  } catch (error) {
-    const errors = error.details.map((detail: any) => detail.message);
-    throw new HttpException(error.name, 400, {
-      errors,
-    });
-  }
+  return await validateSchemaAsync(routeParamIdSchema, payload);
 };
 
 export const validateRoomParamIdMiddleware = async (

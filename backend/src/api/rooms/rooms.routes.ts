@@ -19,7 +19,7 @@ router.post("/", protectRoute, createRoom);
 
 router.use("/:roomId", validateRoomParamIdMiddleware);
 
-router.get("/:roomId", protectRoute, getOneRoom);
+router.get("/:roomId", getOneRoom);
 router.put("/:roomId", protectRoute, updateRoom);
 router.delete("/:roomId", protectRoute, deleteRoom);
 
