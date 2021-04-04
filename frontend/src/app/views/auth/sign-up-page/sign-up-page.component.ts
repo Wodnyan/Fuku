@@ -74,7 +74,7 @@ export class SignUpPageComponent implements OnInit {
       this.auth.signUp(this.credentials.value).subscribe(
         ({ accessToken }) => {
           localStorage.setItem("accessToken", accessToken);
-          this.router.navigate(["/"]);
+          this.router.navigate(["/rooms"]);
         },
         ({ error }) => {
           const isEmailInvalid = error.errors?.some((error: string) => {

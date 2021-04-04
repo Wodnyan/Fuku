@@ -1,0 +1,8 @@
+<h1 *ngIf="room">
+  {{ room.id }}
+  {{ room.user.email }}
+  <div *ngFor="let review of codeReviews">
+    {{ review.description }}
+    {{ review.createdAt }}
+  </div>
+</h1>
