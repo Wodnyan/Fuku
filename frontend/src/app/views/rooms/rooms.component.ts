@@ -9,7 +9,7 @@ import { Room } from "src/types";
 })
 export class RoomsComponent implements OnInit {
   rooms: Room[] | [];
-  createRoomOverlay = true;
+  createRoomOverlay = false;
 
   constructor(private roomsService: RoomsService) {}
 
@@ -23,8 +23,7 @@ export class RoomsComponent implements OnInit {
     );
   }
 
-  openCreateRoomOverlay() {
+  toggleCreateRoomOverlay() {
     this.createRoomOverlay = !this.createRoomOverlay;
-    console.log(this.createRoomOverlay);
   }
 }
