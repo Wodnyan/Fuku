@@ -1,5 +1,7 @@
 <h1>Explore Rooms!</h1>
-<button (click)="toggleCreateRoomOverlay()" class="btn">Create a room</button>
+<button *ngIf="isAuth" (click)="toggleCreateRoomOverlay()" class="btn">
+  Create a room
+</button>
 <app-create-room
   (closeOverlayEvent)="toggleCreateRoomOverlay()"
   *ngIf="createRoomOverlay"
