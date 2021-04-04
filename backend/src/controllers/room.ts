@@ -33,7 +33,9 @@ export class RoomController {
         id: userId,
       },
     });
-    return room;
+    return {
+      id: room.identifiers[0].id,
+    };
   }
 
   static async updateIcon(id: number, icon: string, userId: number) {
