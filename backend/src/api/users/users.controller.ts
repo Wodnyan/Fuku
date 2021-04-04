@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { User } from "../../controllers/user";
 import { CustomRequestUser } from "../../types";
 
-export const getOneUser = async (
+export const checkAuth = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -10,6 +10,22 @@ export const getOneUser = async (
   try {
     const { id } = req.user as CustomRequestUser;
     const user = await User.getOne(id);
+    res.json({
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getOneUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.getOne(Number(userId));
     res.json({
       user,
     });
