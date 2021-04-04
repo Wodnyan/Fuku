@@ -7,10 +7,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(black, 0.5);
+  flex-direction: column;
+  background: rgba(black, 0.8);
+  form {
+    width: 100%;
+    max-width: 700px;
+  }
   .close-button {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 5px;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 2.5rem;
+    cursor: pointer;
   }
 }
