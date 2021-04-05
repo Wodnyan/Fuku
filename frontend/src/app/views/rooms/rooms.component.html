@@ -15,7 +15,7 @@
     <li *ngFor="let room of rooms">
       <app-room-card
         [title]="room.name"
-        description="foobar"
+        [description]="room.description"
         [id]="room.id"
       ></app-room-card>
     </li>
