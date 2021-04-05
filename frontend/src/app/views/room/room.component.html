@@ -6,3 +6,12 @@
     {{ review.createdAt }}
   </div>
 </h1>
+
+<button (click)="toggleOpenCreateCodeReview()" class="btn btn--full">
+  Create New Review Request
+</button>
+
+<app-create-code-review
+  (closeEvent)="toggleOpenCreateCodeReview()"
+  *ngIf="openCreateCodeReview"
+></app-create-code-review>

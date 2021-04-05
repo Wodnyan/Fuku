@@ -1,17 +1,23 @@
-<h1>Explore Rooms!</h1>
-<button *ngIf="isAuth" (click)="toggleCreateRoomOverlay()" class="btn">
-  Create a room
-</button>
-<app-create-room
-  (closeOverlayEvent)="toggleCreateRoomOverlay()"
-  *ngIf="createRoomOverlay"
-></app-create-room>
-<ul>
-  <li *ngFor="let room of rooms">
-    <app-room-card
-      [title]="room.name"
-      description="foobar"
-      [id]="room.id"
-    ></app-room-card>
-  </li>
-</ul>
+<main class="container">
+  <h1 class="call-to-action">Explore Rooms!</h1>
+  <button
+    *ngIf="isAuth"
+    (click)="toggleCreateRoomOverlay()"
+    class="btn btn--full my-3"
+  >
+    Create a room
+  </button>
+  <app-create-room
+    (closeOverlayEvent)="toggleCreateRoomOverlay()"
+    *ngIf="createRoomOverlay"
+  ></app-create-room>
+  <ul class="grid">
+    <li *ngFor="let room of rooms">
+      <app-room-card
+        [title]="room.name"
+        [description]="room.description"
+        [id]="room.id"
+      ></app-room-card>
+    </li>
+  </ul>
+</main>

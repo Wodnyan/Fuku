@@ -13,7 +13,7 @@ export class CreateRoomComponent implements OnInit {
 
   roomDetails = new FormGroup({
     name: new FormControl(""),
-    code: new FormControl(""),
+    description: new FormControl(""),
   });
 
   constructor(private roomsService: RoomsService, private router: Router) {}
@@ -27,7 +27,7 @@ export class CreateRoomComponent implements OnInit {
   onSubmit() {
     this.roomsService
       .postRoom({
-        code: this.roomDetails.get("code").value,
+        description: this.roomDetails.get("description").value,
         name: this.roomDetails.get("name").value,
       })
       .subscribe(

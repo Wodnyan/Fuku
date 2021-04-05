@@ -25,4 +25,11 @@ export class RoomCardComponent implements OnInit {
   get roomLink() {
     return `/rooms/${this.id}`;
   }
+
+  get shortenedDescription() {
+    if (this.description.length > 100) {
+      return `${this.description.substr(0, 100)}...`;
+    }
+    return this.description;
+  }
 }

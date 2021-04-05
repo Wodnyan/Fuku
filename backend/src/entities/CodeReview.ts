@@ -14,6 +14,11 @@ export class CodeReview {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Column({
+    length: 250,
+  })
+  title!: string;
+
   @Column()
   code!: string;
 

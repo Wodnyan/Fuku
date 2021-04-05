@@ -13,6 +13,7 @@ export interface User {
 export interface Room {
   id: number;
   name: string;
+  description: string;
   createdAt: string;
   user: User;
   icon?: string;
