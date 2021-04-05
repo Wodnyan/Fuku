@@ -6,6 +6,25 @@ const routeParamIdSchema = Joi.object({
   roomIdParam: Joi.number().integer(),
 });
 
+const insertRoomSchema = Joi.object({
+  name: Joi.string().max(100).required(),
+  description: Joi.string().max(5000).required(),
+  icon: Joi.string().max(2000),
+});
+
+const updateRoomSchema = Joi.object({
+  description: Joi.string().max(5000),
+  icon: Joi.string().max(2000),
+});
+
+export const validateUpdateRoom = async (payload: any) => {
+  return await validateSchemaAsync(updateRoomSchema, payload);
+};
+
+export const validateInsertRoom = async (payload: any) => {
+  return await validateSchemaAsync(insertRoomSchema, payload);
+};
+
 export const validateRouteParamId = async (payload: any) => {
   return await validateSchemaAsync(routeParamIdSchema, payload);
 };
