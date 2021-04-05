@@ -15,11 +15,11 @@ export class AppComponent implements OnInit {
     this.tokenService.refreshAccessToken().subscribe(({ accessToken }) => {
       localStorage.setItem("accessToken", accessToken);
     }, console.log);
-    // Every minute get a new access token
+    // Every 10 minutes get a new access token
     setInterval(() => {
       this.tokenService.refreshAccessToken().subscribe(({ accessToken }) => {
         localStorage.setItem("accessToken", accessToken);
       }, console.log);
-    }, 60000);
+    }, 600000);
   }
 }
