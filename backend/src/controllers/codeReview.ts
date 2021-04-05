@@ -22,6 +22,7 @@ export class CodeReview {
   static select = [
     "code_reviews.id",
     "code_reviews.code",
+    "code_reviews.title",
     "code_reviews.description",
     "code_reviews.createdAt",
     "code_reviews.updatedAt",
