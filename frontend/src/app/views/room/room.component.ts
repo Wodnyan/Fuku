@@ -12,12 +12,17 @@ import { Review, Room } from "src/types";
 export class RoomComponent implements OnInit {
   room?: Room;
   codeReviews?: Review[] | [];
+  openCreateCodeReview = true;
 
   constructor(
     private route: ActivatedRoute,
     private roomsService: RoomsService,
     private codeReviewService: CodeReviewsService
   ) {}
+
+  toggleOpenCreateCodeReview() {
+    this.openCreateCodeReview = !this.openCreateCodeReview;
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(({ roomId }) => {
