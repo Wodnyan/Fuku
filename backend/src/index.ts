@@ -11,6 +11,7 @@ import api from "./api/";
 import passport from "passport";
 import cors from "cors";
 import passportSetup from "./passport";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ passportSetup();
 // Middleware
 app.use(passport.initialize());
 app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
     origin: FRONTEND_URL,

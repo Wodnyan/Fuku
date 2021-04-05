@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/services/auth/auth.service";
 import { RoomsService } from "src/app/services/rooms/rooms.service";
 import { Room } from "src/types";
 
@@ -9,11 +10,21 @@ import { Room } from "src/types";
 })
 export class RoomsComponent implements OnInit {
   rooms: Room[] | [];
-  createRoomOverlay = true;
+  createRoomOverlay = false;
+  isAuth = false;
 
-  constructor(private roomsService: RoomsService) {}
+  constructor(private roomsService: RoomsService, private auth: AuthService) {}
 
   ngOnInit(): void {
+    this.auth.getUserInfo().subscribe(
+      () => {
+        this.isAuth = true;
+      },
+      (error) => {
+        console.log(error);
+        this.isAuth = false;
+      }
+    );
     this.roomsService.fetchAllRooms().subscribe(
       (data) => {
         console.log(data.rooms);
@@ -23,8 +34,7 @@ export class RoomsComponent implements OnInit {
     );
   }
 
-  openCreateRoomOverlay() {
+  toggleCreateRoomOverlay() {
     this.createRoomOverlay = !this.createRoomOverlay;
-    console.log(this.createRoomOverlay);
   }
 }

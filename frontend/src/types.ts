@@ -5,8 +5,8 @@ export interface Tokens {
 
 export interface User {
   id: number;
-  username: number;
-  email: number;
+  username: string;
+  email: string;
   avatarUrl?: string;
 }
 

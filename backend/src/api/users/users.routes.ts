@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { protectRoute } from "../../middlewares/auth";
-import { getOneUser, login, register } from "./users.controller";
+import { checkAuth, getOneUser, login, register } from "./users.controller";
 
 const router = Router();
 
-router.post("/register", register);
-router.post("/login", login);
+router.get("/auth/check", protectRoute, checkAuth);
 
-router.get("/:id", protectRoute, getOneUser);
+router.post("/auth/register", register);
+router.post("/auth/login", login);
+
+router.get("/:userId", protectRoute, getOneUser);
 
 export default router;

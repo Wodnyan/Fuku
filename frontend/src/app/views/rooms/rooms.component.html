@@ -1,15 +1,16 @@
 <h1>Explore Rooms!</h1>
-<button (click)="openCreateRoomOverlay()" class="btn">Create a room</button>
-<app-create-room *ngIf="createRoomOverlay"></app-create-room>
+<button *ngIf="isAuth" (click)="toggleCreateRoomOverlay()" class="btn">
+  Create a room
+</button>
+<app-create-room
+  (closeOverlayEvent)="toggleCreateRoomOverlay()"
+  *ngIf="createRoomOverlay"
+></app-create-room>
 <ul>
   <li *ngFor="let room of rooms">
     <app-room-card
       [title]="room.name"
-      description="Jfklasjfkljafkljakfjajfkjafklajf
-      fsafkjaklsjflkjf
-      af
-      affas
-      fafsjalkfjalkf"
+      description="foobar"
       [id]="room.id"
     ></app-room-card>
   </li>

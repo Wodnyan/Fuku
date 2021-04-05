@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { RoomsService } from "src/app/services/rooms/rooms.service";
@@ -9,6 +9,8 @@ import { RoomsService } from "src/app/services/rooms/rooms.service";
   styleUrls: ["./create-room.component.scss"],
 })
 export class CreateRoomComponent implements OnInit {
+  @Output() closeOverlayEvent = new EventEmitter<any>();
+
   roomDetails = new FormGroup({
     name: new FormControl(""),
     code: new FormControl(""),
@@ -17,6 +19,10 @@ export class CreateRoomComponent implements OnInit {
   constructor(private roomsService: RoomsService, private router: Router) {}
 
   ngOnInit(): void {}
+
+  closeOverlay() {
+    this.closeOverlayEvent.emit();
+  }
 
   onSubmit() {
     this.roomsService
