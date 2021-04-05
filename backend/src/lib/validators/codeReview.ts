@@ -3,7 +3,8 @@ import joi from "joi";
 import { validateSchemaAsync } from "./validator";
 
 const insertCodeReviewSchema = joi.object({
-  description: joi.string().required(),
+  title: joi.string().max(150).required(),
+  description: joi.string().max(5000).required(),
   code: joi.string().required(),
 });
 

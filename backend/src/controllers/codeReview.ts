@@ -5,6 +5,7 @@ import { validateInsertCodeReview } from "../lib/validators/codeReview";
 import { User } from "./user";
 
 interface InsertData {
+  title: string;
   code: string;
   description: string;
 }
@@ -41,6 +42,7 @@ export class CodeReview {
         id: roomId,
       },
       description: data.description,
+      title: data.title,
     });
     return codeReview;
   }
