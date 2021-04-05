@@ -2,9 +2,7 @@
   <button (click)="closeOverlay()" class="close-button">
     <i class="fas fa-times"></i>
   </button>
-  <h1>
-    Create A New Room
-  </h1>
+  <h1>Create A New Room</h1>
   <form (ngSubmit)="onSubmit()" [formGroup]="roomDetails">
     <div>
       <label for="name"> Name </label>
@@ -14,12 +12,12 @@
       </div>
     </div>
     <div>
-      <label for="code"> Code </label>
+      <label for="description"> Description </label>
       <div class="input-group">
-        <i class="fas fa-code"></i>
+        <i class="fas fa-scroll"></i>
         <textarea
-          formControlName="code"
-          id="code"
+          formControlName="description"
+          id="description"
           type="text"
           class="input"
         ></textarea>

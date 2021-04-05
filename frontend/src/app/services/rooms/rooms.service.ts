@@ -5,7 +5,7 @@ import { API_V1_ENDPOINT } from "src/constants";
 
 interface RoomDetails {
   name: string;
-  code: string;
+  description: string;
 }
 
 @Injectable({
