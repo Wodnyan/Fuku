@@ -18,6 +18,7 @@ export class Room {
   @Column({
     nullable: false,
     unique: true,
+    length: 100,
   })
   name!: string;
 
@@ -26,6 +27,12 @@ export class Room {
     nullable: true,
   })
   icon?: string;
+
+  @Column({
+    length: 5000,
+    nullable: false,
+  })
+  description!: string;
 
   @ManyToOne(() => User, (user) => user.rooms)
   user!: User;

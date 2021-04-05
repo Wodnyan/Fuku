@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -16,7 +17,10 @@ export class CodeReview {
   @Column()
   code!: string;
 
-  @Column()
+  @Column({
+    length: 5000,
+    nullable: false,
+  })
   description!: string;
 
   @ManyToOne(() => User, (user: User) => user.codeReviews)
@@ -28,7 +32,7 @@ export class CodeReview {
   @Column({
     type: "timestamp with time zone",
   })
-  @UpdateDateColumn()
+  @CreateDateColumn()
   createdAt!: string;
 
   @Column({

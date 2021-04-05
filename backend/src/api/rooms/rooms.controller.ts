@@ -39,12 +39,13 @@ export const createRoom = async (
   next: NextFunction
 ) => {
   try {
-    const { name, icon } = req.body;
+    const { name, icon, description } = req.body;
     const { id } = req.user as CustomRequestUser;
     const room = await RoomController.create(
       {
         name,
         icon,
+        description,
       },
       id
     );
@@ -64,8 +65,11 @@ export const updateRoom = async (
   try {
     const { roomId } = req.params;
     const { id } = req.user as CustomRequestUser;
-    const { icon } = req.body;
-    const room = await RoomController.updateIcon(Number(roomId), icon, id);
+    const { icon, description } = req.body;
+    const room = await RoomController.update(Number(roomId), id, {
+      icon,
+      description,
+    });
     res.json({
       room,
     });

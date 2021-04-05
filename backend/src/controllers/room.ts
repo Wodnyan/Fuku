@@ -1,10 +1,16 @@
 import { getRepository } from "typeorm";
 import { Room } from "../entities/Room";
 import { HttpException } from "../exceptions/HttpException";
+import { validateInsertRoom, validateUpdateRoom } from "../lib/validators/room";
 import { User } from "./user";
 
 interface CreateRoomData {
   name: string;
+  description: string;
+  icon?: string;
+}
+interface UpdateRoomData {
+  description?: string;
   icon?: string;
 }
 
@@ -14,6 +20,7 @@ export class RoomController {
     return [
       "rooms.id",
       "rooms.name",
+      "rooms.description",
       "rooms.icon",
       "rooms.createdAt",
       ...userSelect,
@@ -25,10 +32,11 @@ export class RoomController {
   }
 
   static async create(data: CreateRoomData, userId: number) {
-    // TODO: Validation
+    await validateInsertRoom(data);
     const room = await this.roomRepository().insert({
       icon: data.icon,
       name: data.name,
+      description: data.description,
       user: {
         id: userId,
       },
@@ -38,15 +46,17 @@ export class RoomController {
     };
   }
 
-  static async updateIcon(id: number, icon: string, userId: number) {
+  static async update(id: number, userId: number, update: UpdateRoomData) {
+    await validateUpdateRoom(update);
     const isOwner = await this.isOwner(id, userId);
     if (!isOwner) {
       throw new HttpException("Unauthorized", 401);
     }
-    const updatedRoom = await this.roomRepository().update(id, {
-      icon,
-    });
-    return updatedRoom;
+    let updateRoom = await this.roomRepository().findOne(id);
+    updateRoom!.icon = update.icon;
+    updateRoom!.description = update.description!;
+    await this.roomRepository().save(updateRoom!);
+    return updateRoom;
   }
 
   static async delete(id: number, userId: number) {

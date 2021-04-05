@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   OneToMany,
+  CreateDateColumn,
 } from "typeorm";
 import { CodeReview } from "./CodeReview";
 import { Room } from "./Room";
@@ -28,7 +29,7 @@ export class User {
   @Column({
     type: "timestamp with time zone",
   })
-  @UpdateDateColumn()
+  @CreateDateColumn()
   createdAt!: string;
 
   @Column({
