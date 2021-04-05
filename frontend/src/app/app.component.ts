@@ -12,12 +12,14 @@ export class AppComponent implements OnInit {
   constructor(private tokenService: TokenService) {}
 
   ngOnInit() {
-    // Every 5 minutes get a new access token
+    this.tokenService.refreshAccessToken().subscribe(({ accessToken }) => {
+      localStorage.setItem("accessToken", accessToken);
+    }, console.log);
+    // Every minute get a new access token
     setInterval(() => {
       this.tokenService.refreshAccessToken().subscribe(({ accessToken }) => {
         localStorage.setItem("accessToken", accessToken);
-        console.log("NEW ACCESS TOKEN", accessToken);
       }, console.log);
-    }, 300000);
+    }, 60000);
   }
 }
