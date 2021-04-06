@@ -1,0 +1,15 @@
+<article class="card">
+  <div>
+    <a class="card__title" [routerLink]="reviewLink">
+      {{ review.title }}
+    </a>
+    <div class="card__created-at">
+      <span class="mr-1">Published</span>
+      <span>{{ createdAt }}</span>
+    </div>
+  </div>
+  <div class="card__comment-count">
+    {{ numberOfComment }}
+    <i class="far fa-comment-alt"></i>
+  </div>
+</article>

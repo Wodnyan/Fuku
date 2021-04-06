@@ -1,17 +1,14 @@
-<h1 *ngIf="room">
-  {{ room.id }}
-  {{ room.user.email }}
-  <div *ngFor="let review of codeReviews">
-    {{ review.description }}
-    {{ review.createdAt }}
+<div class="container">
+  <button (click)="toggleOpenCreateCodeReview()" class="btn btn--full">
+    Create New Review Request
+  </button>
+  <app-create-code-review
+    (closeEvent)="toggleOpenCreateCodeReview()"
+    *ngIf="openCreateCodeReview"
+  ></app-create-code-review>
+
+  <h1>Reviews</h1>
+  <div class="mb-4" *ngFor="let review of codeReviews">
+    <app-review-card [review]="review"> </app-review-card>
   </div>
-</h1>
-
-<button (click)="toggleOpenCreateCodeReview()" class="btn btn--full">
-  Create New Review Request
-</button>
-
-<app-create-code-review
-  (closeEvent)="toggleOpenCreateCodeReview()"
-  *ngIf="openCreateCodeReview"
-></app-create-code-review>
+</div>
