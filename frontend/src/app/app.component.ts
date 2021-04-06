@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewChecked, Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { NavBarService } from "./services/nav-bar/nav-bar.service";
 import { TokenService } from "./services/token/token.service";
 
 @Component({
@@ -9,7 +11,7 @@ import { TokenService } from "./services/token/token.service";
 export class AppComponent implements OnInit {
   title = "Fuku";
 
-  constructor(private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService, public nav: NavBarService) {}
 
   ngOnInit() {
     this.tokenService.refreshAccessToken().subscribe(({ accessToken }) => {
