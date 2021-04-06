@@ -1,0 +1,28 @@
+.header {
+  margin-bottom: 1rem;
+  background: var(--color-beta);
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    a {
+      color: var(--color-text);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+    .home {
+      font-size: 2rem;
+    }
+    .nav .nav-list {
+      display: flex;
+      &__item {
+        margin-left: 1rem;
+      }
+    }
+  }
+}

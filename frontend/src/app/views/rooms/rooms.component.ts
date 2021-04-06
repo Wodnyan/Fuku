@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth/auth.service";
+import { NavBarService } from "src/app/services/nav-bar/nav-bar.service";
 import { RoomsService } from "src/app/services/rooms/rooms.service";
 import { Room } from "src/types";
 
@@ -13,9 +14,14 @@ export class RoomsComponent implements OnInit {
   createRoomOverlay = false;
   isAuth = false;
 
-  constructor(private roomsService: RoomsService, private auth: AuthService) {}
+  constructor(
+    private roomsService: RoomsService,
+    private auth: AuthService,
+    private nav: NavBarService
+  ) {}
 
   ngOnInit(): void {
+    this.nav.show();
     this.auth.getUserInfo().subscribe(
       () => {
         this.isAuth = true;

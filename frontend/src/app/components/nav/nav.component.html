@@ -1,0 +1,17 @@
+<header *ngIf="nav.visible" class="header">
+  <div class="container">
+    <a class="home" routerLink="/">FUKU</a>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-list__item">
+          <a routerLink="/">Home</a>
+        </li>
+        <li class="nav-list__item">
+          <a routerLink="/rooms">Rooms</a>
+        </li>
+        <!-- TODO: ONLY RENDER IF USER IS LOGGED IN -->
+        <li class="nav-list__item">USER</li>
+      </ul>
+    </nav>
+  </div>
+</header>

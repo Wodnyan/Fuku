@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth/auth.service";
+import { NavBarService } from "src/app/services/nav-bar/nav-bar.service";
 
 type Input = "username" | "email" | "password";
 
@@ -41,7 +42,11 @@ export class SignUpPageComponent implements OnInit {
     { input: "email", errors: null },
   ];
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private nav: NavBarService
+  ) {}
 
   public get username() {
     return this.credentials.get("username");
@@ -119,5 +124,7 @@ export class SignUpPageComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.nav.hide();
+  }
 }

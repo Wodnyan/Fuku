@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CodeReviewsService } from "src/app/services/code-reviews/code-reviews.service";
+import { NavBarService } from "src/app/services/nav-bar/nav-bar.service";
 import { RoomsService } from "src/app/services/rooms/rooms.service";
 import { Review, Room } from "src/types";
 
@@ -17,7 +18,8 @@ export class RoomComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private roomsService: RoomsService,
-    private codeReviewService: CodeReviewsService
+    private codeReviewService: CodeReviewsService,
+    private nav: NavBarService
   ) {}
 
   toggleOpenCreateCodeReview() {
@@ -25,6 +27,7 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nav.show();
     this.route.params.subscribe(({ roomId }) => {
       this.roomsService.fetchOneRoom(roomId).subscribe(({ room }) => {
         console.log(room);

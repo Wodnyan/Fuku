@@ -29,7 +29,6 @@ export class AuthService {
   }
 
   getUserInfo(): Observable<{ user?: User }> {
-    console.log(localStorage.getItem("accessToken"));
     return this.http.get(`${API_V1_ENDPOINT}/users/auth/check`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

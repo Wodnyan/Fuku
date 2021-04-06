@@ -14,6 +14,7 @@ import { RoomComponent } from './views/room/room.component';
 import { CreateRoomComponent } from './components/create-room/create-room.component';
 import { CreateCodeReviewComponent } from './components/create-code-review/create-code-review.component';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReviewCardComponent } from './components/review-card/review-card.compon
     CreateRoomComponent,
     CreateCodeReviewComponent,
     ReviewCardComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
