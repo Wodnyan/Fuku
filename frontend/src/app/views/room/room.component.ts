@@ -12,7 +12,7 @@ import { Review, Room } from "src/types";
 export class RoomComponent implements OnInit {
   room?: Room;
   codeReviews?: Review[] | [];
-  openCreateCodeReview = true;
+  openCreateCodeReview = false;
 
   constructor(
     private route: ActivatedRoute,

@@ -21,6 +21,7 @@ export interface Room {
 
 export interface Review {
   id: number;
+  title: string;
   code: string;
   description: string;
   createdAt: string;
