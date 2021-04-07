@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "src/app/services/auth/auth.service";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 import { NavBarService } from "src/app/services/nav-bar/nav-bar.service";
 import { RoomsService } from "src/app/services/rooms/rooms.service";
-import { Room } from "src/types";
+import { Room, User } from "src/types";
 
 @Component({
   selector: "app-rooms",
@@ -12,25 +13,22 @@ import { Room } from "src/types";
 export class RoomsComponent implements OnInit {
   rooms: Room[] | [];
   createRoomOverlay = false;
+  user$: Observable<User | null>;
   isAuth = false;
 
   constructor(
     private roomsService: RoomsService,
-    private auth: AuthService,
-    private nav: NavBarService
-  ) {}
+    private nav: NavBarService,
+    public store: Store<{ user: User | null }>
+  ) {
+    this.user$ = store.select("user");
+  }
 
   ngOnInit(): void {
+    this.user$.subscribe(() => {
+      this.isAuth = true;
+    });
     this.nav.show();
-    this.auth.getUserInfo().subscribe(
-      () => {
-        this.isAuth = true;
-      },
-      (error) => {
-        console.log(error);
-        this.isAuth = false;
-      }
-    );
     this.roomsService.fetchAllRooms().subscribe(
       (data) => {
         console.log(data.rooms);

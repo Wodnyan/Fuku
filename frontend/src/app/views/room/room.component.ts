@@ -30,12 +30,12 @@ export class RoomComponent implements OnInit {
     this.nav.show();
     this.route.params.subscribe(({ roomId }) => {
       this.roomsService.fetchOneRoom(roomId).subscribe(({ room }) => {
-        console.log(room);
+        // console.log(room);
         this.room = room;
       });
       this.codeReviewService.getAllCodeReviews(roomId).subscribe(
         ({ codeReviews }) => {
-          console.log("Code Reviews", codeReviews);
+          // console.log("Code Reviews", codeReviews);
           this.codeReviews = codeReviews;
         },
         (error) => {
