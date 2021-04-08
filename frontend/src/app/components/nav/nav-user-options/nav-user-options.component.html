@@ -1,0 +1,11 @@
+<div class="container">
+  <button (click)="toggleOptions()" class="nav-avatar-btn">
+    <img [src]="avatar" alt="avatar" />
+  </button>
+  <ul *ngIf="showOptions">
+    <li>My Reviews</li>
+    <li>My Rooms</li>
+    <li>Settings</li>
+    <li>Log Out</li>
+  </ul>
+</div>

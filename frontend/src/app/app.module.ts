@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
+import { StoreModule } from "@ngrx/store";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -10,11 +11,13 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { PasswordInputComponent } from "./components/password-input/password-input.component";
 import { RoomsComponent } from "./views/rooms/rooms.component";
 import { RoomCardComponent } from "./components/room-card/room-card.component";
-import { RoomComponent } from './views/room/room.component';
-import { CreateRoomComponent } from './components/create-room/create-room.component';
-import { CreateCodeReviewComponent } from './components/create-code-review/create-code-review.component';
-import { ReviewCardComponent } from './components/review-card/review-card.component';
-import { NavComponent } from './components/nav/nav.component';
+import { RoomComponent } from "./views/room/room.component";
+import { CreateRoomComponent } from "./components/create-room/create-room.component";
+import { CreateCodeReviewComponent } from "./components/create-code-review/create-code-review.component";
+import { ReviewCardComponent } from "./components/review-card/review-card.component";
+import { NavComponent } from "./components/nav/nav.component";
+import { NavUserOptionsComponent } from "./components/nav/nav-user-options/nav-user-options.component";
+import { userReducer } from "./state/user/user.reducer";
 
 @NgModule({
   declarations: [
@@ -29,12 +32,19 @@ import { NavComponent } from './components/nav/nav.component';
     CreateCodeReviewComponent,
     ReviewCardComponent,
     NavComponent,
+    NavUserOptionsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    StoreModule.forRoot(
+      {
+        user: userReducer,
+      },
+      {}
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

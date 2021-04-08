@@ -10,7 +10,9 @@
           <a routerLink="/rooms">Rooms</a>
         </li>
         <!-- TODO: ONLY RENDER IF USER IS LOGGED IN -->
-        <li class="nav-list__item">USER</li>
+        <li *ngIf="isAuth" class="nav-list__item">
+          <app-nav-user-options [user]="user"></app-nav-user-options>
+        </li>
       </ul>
     </nav>
   </div>
