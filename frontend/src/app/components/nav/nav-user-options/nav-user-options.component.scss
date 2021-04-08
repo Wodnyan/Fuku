@@ -1,7 +1,9 @@
 .container {
   .nav-avatar-btn {
+    $btn-size: 35px;
     display: flex;
-    width: 35px;
+    width: $btn-size;
+    height: $btn-size;
     background: none;
     border: none;
     border-radius: 50%;
