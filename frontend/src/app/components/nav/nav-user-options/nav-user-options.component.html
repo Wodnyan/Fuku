@@ -2,10 +2,23 @@
   <button (click)="toggleOptions()" class="nav-avatar-btn">
     <img [src]="avatar" alt="avatar" />
   </button>
-  <ul *ngIf="showOptions">
-    <li>My Reviews</li>
-    <li>My Rooms</li>
-    <li>Settings</li>
-    <li>Log Out</li>
+  <ul class="options" *ngIf="showOptions">
+    <li class="options__item options__item--username">
+      <p>
+        Signed in as <span class="username">{{ user.username }}</span>
+      </p>
+    </li>
+    <li class="options__item">
+      <a routerLink="/"> My Reviews </a>
+    </li>
+    <li class="options__item">
+      <a routerLink="/"> My Rooms </a>
+    </li>
+    <li class="options__item">
+      <a routerLink="/"> Settings </a>
+    </li>
+    <li class="options__item">
+      <button>Logout</button>
+    </li>
   </ul>
 </div>
