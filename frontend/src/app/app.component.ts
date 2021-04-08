@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
 import { User } from "src/types";
 import { AuthService } from "./services/auth/auth.service";
 import { NavBarService } from "./services/nav-bar/nav-bar.service";
@@ -14,18 +13,15 @@ import { addUser, removeUser } from "./state/user/user.actions";
 })
 export class AppComponent implements OnInit {
   title = "Fuku";
-  count$: Observable<User | null>;
 
   constructor(
     private tokenService: TokenService,
     public nav: NavBarService,
     private auth: AuthService,
     private store: Store<{ user: User }>
-  ) {
-    this.count$ = store.select("user");
-  }
+  ) {}
 
-  ngOnInit() {
+  changeRoute() {
     this.auth.fetchUserInfo().subscribe(
       ({ user }) => {
         this.store.dispatch(addUser(user));
@@ -35,7 +31,9 @@ export class AppComponent implements OnInit {
         console.log(error);
       }
     );
+  }
 
+  ngOnInit() {
     this.tokenService.refreshAccessToken().subscribe(({ accessToken }) => {
       localStorage.setItem("accessToken", accessToken);
     }, console.log);
