@@ -1,10 +1,15 @@
 <main class="container">
   <div class="hero">
     <h1>Fuku</h1>
-    <p>Code Review Thy Neighbours code.</p>
-    <div>
+    <p *ngIf="isAuth">Welcome back {{ user.username | uppercase }}</p>
+    <p *ngIf="!isAuth">Code Review Thy Neighbours code.</p>
+    <div *ngIf="!isAuth">
       <a class="btn mr-3 mt-4" routerLink="/auth/login">Log in!</a>
-      <a class="btn btn--secondary" routerLink="/auth/sign-up">Sign Up!</a>
+      <a class="btn" routerLink="/auth/sign-up">Sign Up!</a>
+    </div>
+    <div *ngIf="isAuth">
+      <a class="btn mr-3 mt-4" routerLink="/rooms">Rooms</a>
+      <a class="btn mr-3 mt-4" routerLink="/rooms">Logout</a>
     </div>
   </div>
   <div class="box-container">
