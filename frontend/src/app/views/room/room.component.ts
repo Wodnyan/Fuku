@@ -26,16 +26,19 @@ export class RoomComponent implements OnInit {
     this.openCreateCodeReview = !this.openCreateCodeReview;
   }
 
+  onNewRoom(item: Review) {
+    this.codeReviews = [item, ...this.codeReviews];
+    this.openCreateCodeReview = false;
+  }
+
   ngOnInit(): void {
     this.nav.show();
     this.route.params.subscribe(({ roomId }) => {
       this.roomsService.fetchOneRoom(roomId).subscribe(({ room }) => {
-        // console.log(room);
         this.room = room;
       });
       this.codeReviewService.getAllCodeReviews(roomId).subscribe(
         ({ codeReviews }) => {
-          // console.log("Code Reviews", codeReviews);
           this.codeReviews = codeReviews;
         },
         (error) => {

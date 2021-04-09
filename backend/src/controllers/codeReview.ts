@@ -45,7 +45,9 @@ export class CodeReview {
       description: data.description,
       title: data.title,
     });
-    return codeReview;
+    return {
+      id: codeReview.identifiers[0].id,
+    };
   }
 
   static async getAll(options?: Options) {

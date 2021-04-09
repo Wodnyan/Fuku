@@ -4,6 +4,7 @@
   </button>
   <app-create-code-review
     (closeEvent)="toggleOpenCreateCodeReview()"
+    (reviewEvent)="onNewRoom($event)"
     *ngIf="openCreateCodeReview"
   ></app-create-code-review>
 
