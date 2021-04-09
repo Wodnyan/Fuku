@@ -10,6 +10,11 @@ interface SignUpCredentials {
   password: string;
 }
 
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -21,6 +26,16 @@ export class AuthService {
   ): Observable<{ accessToken: keyof Tokens }> {
     return this.http.post<any>(
       `${API_V1_ENDPOINT}/users/auth/register`,
+      credentials,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  login(credentials: LoginCredentials): Observable<{ accessToken: string }> {
+    return this.http.post<any>(
+      `${API_V1_ENDPOINT}/users/auth/login`,
       credentials,
       {
         withCredentials: true,

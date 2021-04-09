@@ -18,6 +18,7 @@ import { ReviewCardComponent } from "./components/review-card/review-card.compon
 import { NavComponent } from "./components/nav/nav.component";
 import { NavUserOptionsComponent } from "./components/nav/nav-user-options/nav-user-options.component";
 import { userReducer } from "./state/user/user.reducer";
+import { LoginPageComponent } from './views/auth/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { userReducer } from "./state/user/user.reducer";
     ReviewCardComponent,
     NavComponent,
     NavUserOptionsComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,

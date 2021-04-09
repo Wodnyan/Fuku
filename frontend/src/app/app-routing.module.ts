@@ -5,6 +5,7 @@ import { LandingPageComponent } from "./views/landing-page/landing-page.componen
 import { SignUpPageComponent } from "./views/auth/sign-up-page/sign-up-page.component";
 import { RoomsComponent } from "./views/rooms/rooms.component";
 import { RoomComponent } from "./views/room/room.component";
+import { LoginPageComponent } from "./views/auth/login-page/login-page.component";
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: "auth/sign-up",
     component: SignUpPageComponent,
+  },
+  {
+    path: "auth/login",
+    component: LoginPageComponent,
   },
   {
     path: "rooms",
