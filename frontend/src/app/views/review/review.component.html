@@ -1,0 +1,12 @@
+<div class="container">
+  <a [routerLink]="'/rooms/' + roomId"> Go Back </a>
+  <h1 *ngIf="isLoading" class="loading">Loading...</h1>
+  <div *ngIf="!isLoading">
+    <div class="review-info">
+      <h1>{{ codeReview?.title }}</h1>
+      <p>{{ codeReview?.description }}</p>
+      <div>{{ createdAt }}</div>
+    </div>
+    <code class="code">{{ codeReview?.code }}</code>
+  </div>
+</div>

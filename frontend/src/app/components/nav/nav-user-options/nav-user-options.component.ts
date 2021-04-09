@@ -13,7 +13,7 @@ export class NavUserOptionsComponent implements OnInit {
   @Input()
   user: User | null;
 
-  public showOptions = true;
+  public showOptions = false;
 
   constructor(private _eref: ElementRef) {}
 

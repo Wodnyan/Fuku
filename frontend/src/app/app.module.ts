@@ -19,6 +19,7 @@ import { NavComponent } from "./components/nav/nav.component";
 import { NavUserOptionsComponent } from "./components/nav/nav-user-options/nav-user-options.component";
 import { userReducer } from "./state/user/user.reducer";
 import { LoginPageComponent } from './views/auth/login-page/login-page.component';
+import { ReviewComponent } from './views/review/review.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LoginPageComponent } from './views/auth/login-page/login-page.component
     NavComponent,
     NavUserOptionsComponent,
     LoginPageComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { SignUpPageComponent } from "./views/auth/sign-up-page/sign-up-page.comp
 import { RoomsComponent } from "./views/rooms/rooms.component";
 import { RoomComponent } from "./views/room/room.component";
 import { LoginPageComponent } from "./views/auth/login-page/login-page.component";
+import { ReviewComponent } from "./views/review/review.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: "rooms/:roomId",
     component: RoomComponent,
+  },
+  {
+    path: "rooms/:roomId/reviews/:reviewId",
+    component: ReviewComponent,
   },
 ];
 
