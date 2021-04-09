@@ -37,11 +37,15 @@ export class CodeReviewsService {
   }
 
   postCodeReview(roomId: number, data: PostData) {
-    return this.http.post(this.apiEndpoint(roomId), data, {
-      withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
+    return this.http.post<{ codeReview: Review }>(
+      this.apiEndpoint(roomId),
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
   }
 }

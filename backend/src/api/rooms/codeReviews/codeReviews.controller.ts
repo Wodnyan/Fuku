@@ -18,8 +18,9 @@ export const postCodeReview = async (
     const { roomId } = req.params;
     const newCodeReview = await CodeReview.insert(req.body, id, Number(roomId));
     // TODO: Query the new code review
+    const codeReview = await CodeReview.getOne(newCodeReview.id);
     res.status(201).json({
-      codeReview: newCodeReview,
+      codeReview,
     });
   } catch (error) {
     next(error);

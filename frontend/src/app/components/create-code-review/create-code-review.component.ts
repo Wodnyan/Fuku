@@ -10,6 +10,7 @@ import { CodeReviewsService } from "src/app/services/code-reviews/code-reviews.s
 })
 export class CreateCodeReviewComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>();
+  @Output() reviewEvent = new EventEmitter<any>();
 
   codeReviewData = new FormGroup({
     title: new FormControl(""),
@@ -25,12 +26,13 @@ export class CreateCodeReviewComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.codeReviewData.value);
     this.routes.params.subscribe((params) => {
       this.codeReviewService
         .postCodeReview(params.roomId, this.codeReviewData.value)
         .subscribe(
-          (data) => console.log(data),
+          ({ codeReview }) => {
+            this.reviewEvent.emit(codeReview);
+          },
           (error) => console.log(error)
         );
     });
