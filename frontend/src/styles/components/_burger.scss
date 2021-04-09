@@ -1,0 +1,46 @@
+.burger {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__lines {
+    $burger-width: 25px;
+    $burger-height: 2px;
+    position: relative;
+    background: white;
+    height: $burger-height;
+    width: 100%;
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      background: white;
+      width: $burger-width;
+      height: $burger-height;
+      transition: transform 0.2s ease;
+    }
+
+    &::after {
+      top: 10px;
+    }
+    &::before {
+      top: -10px;
+    }
+    &--active {
+      visibility: hidden;
+      &::after {
+        transform: rotate(45deg);
+        top: 50%;
+        visibility: visible;
+      }
+      &::before {
+        visibility: visible;
+        top: 50%;
+        transform: rotate(-225deg);
+      }
+    }
+  }
+}

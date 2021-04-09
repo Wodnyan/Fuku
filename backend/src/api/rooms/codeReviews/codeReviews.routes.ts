@@ -19,7 +19,6 @@ router.get("/", getAllCodeReviews);
 router.get(
   "/:codeReviewId",
   validateCodeReviewRouteParamIdMiddleware,
-  protectRoute,
   getOneCodeReview
 );
 

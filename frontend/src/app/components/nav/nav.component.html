@@ -1,7 +1,13 @@
 <header *ngIf="nav.visible" class="header">
   <div class="container">
     <a class="home" routerLink="/">FUKU</a>
-    <nav class="nav">
+    <button (click)="toggleNavMobileMenu()" class="burger burger--active">
+      <div
+        [class.burger__lines--active]="navMobileMenu"
+        class="burger__lines"
+      ></div>
+    </button>
+    <nav [class.nav--hide]="!navMobileMenu" class="nav">
       <ul class="nav-list">
         <li class="nav-list__item">
           <a routerLink="/">Home</a>
@@ -10,7 +16,7 @@
           <a routerLink="/rooms">Rooms</a>
         </li>
         <!-- TODO: ONLY RENDER IF USER IS LOGGED IN -->
-        <li *ngIf="isAuth" class="nav-list__item">
+        <li *ngIf="isAuth" class="nav-list__item nav-list__item--options">
           <app-nav-user-options [user]="user"></app-nav-user-options>
         </li>
       </ul>

@@ -1,0 +1,45 @@
+<main class="container">
+  <section class="top">
+    <h1>Sign Up!</h1>
+    <a class="btn btn--full" href="http://localhost:5050/api/v1/oauth/github"
+      >Log in with Github</a
+    >
+  </section>
+  <form (ngSubmit)="onSubmit()" [formGroup]="credentials">
+    <div class="mb-2">
+      <label for="email">Email</label>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input
+          id="email"
+          formControlName="email"
+          placeholder="Email"
+          type="email"
+        />
+      </div>
+      <div class="error" *ngIf="getErrors('email').required">
+        Email is required.
+      </div>
+    </div>
+    <div class="mb-2">
+      <app-password-input
+        [errors]="getErrors('password')"
+        password="password"
+        [formGroup]="credentials"
+      >
+      </app-password-input>
+    </div>
+    <div class="mb-2">
+      <div class="error fetch-error" *ngIf="getErrors('fetch').invalid">
+        Invalid Credentials
+      </div>
+    </div>
+    <div class="bottom">
+      <span>
+        Don't have an account?
+        <a routerLink="/auth/sign-up">Sign Up!</a>
+      </span>
+      <button class="btn" type="submit">Login!</button>
+    </div>
+  </form>
+</main>

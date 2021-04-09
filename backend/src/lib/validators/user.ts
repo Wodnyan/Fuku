@@ -2,7 +2,7 @@ import joi from "joi";
 import { validateSchemaAsync } from "./validator";
 
 const loginSchema = joi.object({
-  email: joi.string().email().max(320).required(),
+  email: joi.string().max(320).required(),
   password: joi.string().max(120).required(),
 });
 

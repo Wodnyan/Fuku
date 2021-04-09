@@ -16,11 +16,15 @@ main.container {
     }
   }
   .box {
+    $box-size: 500px;
     position: absolute;
     background: var(--color-beta);
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
+    width: $box-size;
+    height: $box-size;
+    max-width: 50%;
+    max-height: 50vh;
+    border-radius: 5px;
     &--1 {
       top: 40%;
       left: 55%;

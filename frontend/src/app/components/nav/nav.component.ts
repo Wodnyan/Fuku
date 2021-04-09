@@ -12,6 +12,7 @@ import { User } from "src/types";
 export class NavComponent implements OnInit {
   public user: User | null = null;
   public user$: Observable<User | null>;
+  public navMobileMenu = false;
 
   constructor(
     public nav: NavBarService,
@@ -28,5 +29,9 @@ export class NavComponent implements OnInit {
 
   get isAuth() {
     return this.user !== null;
+  }
+
+  toggleNavMobileMenu() {
+    this.navMobileMenu = !this.navMobileMenu;
   }
 }
