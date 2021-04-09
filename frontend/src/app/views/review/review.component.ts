@@ -4,6 +4,7 @@ import { CodeReviewsService } from "src/app/services/code-reviews/code-reviews.s
 import { NavBarService } from "src/app/services/nav-bar/nav-bar.service";
 import { Review } from "src/types";
 import { format } from "timeago.js";
+import { HighlightResult } from "ngx-highlightjs";
 
 @Component({
   selector: "app-review",

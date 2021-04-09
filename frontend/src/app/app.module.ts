@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
+import { HighlightModule, HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -18,8 +19,8 @@ import { ReviewCardComponent } from "./components/review-card/review-card.compon
 import { NavComponent } from "./components/nav/nav.component";
 import { NavUserOptionsComponent } from "./components/nav/nav-user-options/nav-user-options.component";
 import { userReducer } from "./state/user/user.reducer";
-import { LoginPageComponent } from './views/auth/login-page/login-page.component';
-import { ReviewComponent } from './views/review/review.component';
+import { LoginPageComponent } from "./views/auth/login-page/login-page.component";
+import { ReviewComponent } from "./views/review/review.component";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ReviewComponent } from './views/review/review.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HighlightModule,
     StoreModule.forRoot(
       {
         user: userReducer,
@@ -50,7 +52,14 @@ import { ReviewComponent } from './views/review/review.component';
       {}
     ),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import("highlight.js"),
+      },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

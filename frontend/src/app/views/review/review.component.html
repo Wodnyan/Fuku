@@ -5,8 +5,10 @@
     <div class="review-info">
       <h1>{{ codeReview?.title }}</h1>
       <p>{{ codeReview?.description }}</p>
-      <div>{{ createdAt }}</div>
+      <div>
+        Posted <span>{{ createdAt }}</span>
+      </div>
     </div>
-    <code class="code">{{ codeReview?.code }}</code>
+    <pre><code [highlight]="codeReview?.code"></code></pre>
   </div>
 </div>
