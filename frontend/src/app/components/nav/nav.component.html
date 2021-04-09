@@ -1,8 +1,13 @@
 <header *ngIf="nav.visible" class="header">
   <div class="container">
     <a class="home" routerLink="/">FUKU</a>
-    <button (click)="toggleNavMobileMenu()" class="burger">CLICK</button>
-    <nav [class.nav--hide]="navMobileMenu" class="nav">
+    <button (click)="toggleNavMobileMenu()" class="burger burger--active">
+      <div
+        [class.burger__lines--active]="navMobileMenu"
+        class="burger__lines"
+      ></div>
+    </button>
+    <nav [class.nav--hide]="!navMobileMenu" class="nav">
       <ul class="nav-list">
         <li class="nav-list__item">
           <a routerLink="/">Home</a>
