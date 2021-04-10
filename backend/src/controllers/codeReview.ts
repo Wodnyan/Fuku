@@ -11,7 +11,7 @@ interface InsertData {
 }
 
 interface Options {
-  offset?: number;
+  skip?: number;
   limit?: number;
   orderBy?: "asc" | "desc";
 }
@@ -56,7 +56,7 @@ export class CodeReview {
       .leftJoinAndSelect("code_reviews.user", "user")
       .select(this.select)
       .limit(options?.limit || undefined)
-      .skip(options?.offset || undefined)
+      .skip(options?.skip || undefined)
       .orderBy(
         "code_reviews.createdAt",
         options?.orderBy === "asc" ? "ASC" : "DESC"

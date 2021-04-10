@@ -16,6 +16,9 @@ interface UpdateRoomData {
 
 interface GetAllOptions {
   name?: string;
+  limit?: number;
+  skip?: number;
+  orderBy?: "asc" | "desc";
 }
 
 export class RoomController {
@@ -94,6 +97,9 @@ export class RoomController {
       .where("rooms.name like :name", {
         name: `%${options?.name?.toString() || ""}%`,
       })
+      .skip(options?.skip)
+      .take(options?.limit)
+      .orderBy("rooms.createdAt", options?.orderBy === "asc" ? "ASC" : "DESC")
       .getMany();
     return rooms;
   }

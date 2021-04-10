@@ -4,7 +4,7 @@ import { CustomRequestUser } from "../../../types";
 
 interface CodeReviewQueryParams {
   limit?: number;
-  offset?: number;
+  skip?: number;
   orderBy?: "asc" | "desc";
 }
 
@@ -33,10 +33,10 @@ export const getAllCodeReviews = async (
   next: NextFunction
 ) => {
   try {
-    const { limit, offset, orderBy } = req.query as CodeReviewQueryParams;
+    const { limit, skip, orderBy } = req.query as CodeReviewQueryParams;
     const codeReviews = await CodeReview.getAll({
       limit,
-      offset,
+      skip,
       orderBy,
     });
     res.json({
