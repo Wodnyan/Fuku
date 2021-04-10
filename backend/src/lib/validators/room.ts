@@ -17,6 +17,13 @@ const updateRoomSchema = Joi.object({
   icon: Joi.string().max(2000),
 });
 
+const queryParamSchema = Joi.object({
+  name: Joi.string(),
+  limit: Joi.number().integer(),
+  skip: Joi.number().integer(),
+  orderBy: Joi.string().lowercase().equal("asc", "desc"),
+});
+
 export const validateUpdateRoom = async (payload: any) => {
   return await validateSchemaAsync(updateRoomSchema, payload);
 };
@@ -27,6 +34,10 @@ export const validateInsertRoom = async (payload: any) => {
 
 export const validateRouteParamId = async (payload: any) => {
   return await validateSchemaAsync(routeParamIdSchema, payload);
+};
+
+export const validateGetAllRoomsQueryParams = async (payload: any) => {
+  return await validateSchemaAsync(queryParamSchema, payload);
 };
 
 export const validateRoomParamIdMiddleware = async (

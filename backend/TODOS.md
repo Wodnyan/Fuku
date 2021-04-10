@@ -1,5 +1,6 @@
 ### Apr 10
-- [X] Search for rooms by name
-- [X] Room pagination
-- [X] Order rooms by date of creation
-- [ ] Add validation to get all rooms endpoint for request queries (name, limit, skip)
+
+- [x] Search for rooms by name
+- [x] Room pagination
+- [x] Order rooms by date of creation
+- [x] Add validation to get all rooms endpoint for request queries (name, limit, skip, orderBy)

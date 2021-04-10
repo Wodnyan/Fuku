@@ -1,7 +1,11 @@
 import { getRepository } from "typeorm";
 import { Room } from "../entities/Room";
 import { HttpException } from "../exceptions/HttpException";
-import { validateInsertRoom, validateUpdateRoom } from "../lib/validators/room";
+import {
+  validateGetAllRoomsQueryParams,
+  validateInsertRoom,
+  validateUpdateRoom,
+} from "../lib/validators/room";
 import { User } from "./user";
 
 interface CreateRoomData {
@@ -90,6 +94,7 @@ export class RoomController {
   }
 
   static async getAll(options?: GetAllOptions) {
+    await validateGetAllRoomsQueryParams(options);
     const rooms = await this.roomRepository()
       .createQueryBuilder("rooms")
       .leftJoinAndSelect("rooms.user", "user")
