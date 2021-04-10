@@ -3,12 +3,13 @@ import { RoomController } from "../../controllers/room";
 import { CustomRequestUser } from "../../types";
 
 export const getAllRooms = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const rooms = await RoomController.getAll();
+    // TODO: Add validation
+    const rooms = await RoomController.getAll(req.query);
     res.json({
       rooms,
     });
