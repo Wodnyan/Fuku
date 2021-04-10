@@ -14,6 +14,10 @@ interface UpdateRoomData {
   icon?: string;
 }
 
+interface GetAllOptions {
+  name?: string;
+}
+
 export class RoomController {
   private static get select() {
     const userSelect = User.select.map((select) => `user.${select}`);
@@ -82,11 +86,14 @@ export class RoomController {
     return room;
   }
 
-  static async getAll() {
+  static async getAll(options?: GetAllOptions) {
     const rooms = await this.roomRepository()
       .createQueryBuilder("rooms")
       .leftJoinAndSelect("rooms.user", "user")
       .select(this.select)
+      .where("rooms.name like :name", {
+        name: `%${options?.name?.toString() || ""}%`,
+      })
       .getMany();
     return rooms;
   }
