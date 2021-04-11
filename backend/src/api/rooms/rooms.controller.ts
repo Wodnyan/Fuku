@@ -8,7 +8,6 @@ export const getAllRooms = async (
   next: NextFunction
 ) => {
   try {
-    // TODO: Add validation
     const rooms = await RoomController.getAll(req.query);
     res.json({
       rooms,

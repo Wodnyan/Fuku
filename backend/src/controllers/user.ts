@@ -8,6 +8,7 @@ import {
   validateLoginCredentials,
   validateSignUpCredentials,
 } from "../lib/validators/user";
+import { BlackListedRefreshTokenController } from "./blacklistedRefreshToken";
 
 interface Tokens {
   refreshToken: string;
@@ -78,6 +79,14 @@ export class User {
     return {
       refreshToken,
     };
+  }
+
+  public static async logout(token: string) {
+    // Blacklist token
+    const blacklisted = await BlackListedRefreshTokenController.blackList(
+      token
+    );
+    return blacklisted;
   }
 
   public static async login(credentials: LoginCredentials): Promise<Tokens> {
