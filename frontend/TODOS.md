@@ -1,0 +1,4 @@
+- [ ] Paginate the rooms
+- [x] Search rooms by their name
+- [ ] Fix z-index bugs (Search Rooms input & User options)
+- [x] Change auth endpoints

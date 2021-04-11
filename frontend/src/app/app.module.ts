@@ -8,7 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LandingPageComponent } from "./views/landing-page/landing-page.component";
 import { SignUpPageComponent } from "./views/auth/sign-up-page/sign-up-page.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { PasswordInputComponent } from "./components/password-input/password-input.component";
 import { RoomsComponent } from "./views/rooms/rooms.component";
 import { RoomCardComponent } from "./components/room-card/room-card.component";
@@ -21,6 +21,7 @@ import { NavUserOptionsComponent } from "./components/nav/nav-user-options/nav-u
 import { userReducer } from "./state/user/user.reducer";
 import { LoginPageComponent } from "./views/auth/login-page/login-page.component";
 import { ReviewComponent } from "./views/review/review.component";
+import { SearchRoomsComponent } from "./components/search-rooms/search-rooms.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ReviewComponent } from "./views/review/review.component";
     NavUserOptionsComponent,
     LoginPageComponent,
     ReviewComponent,
+    SearchRoomsComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { ReviewComponent } from "./views/review/review.component";
     ReactiveFormsModule,
     HttpClientModule,
     HighlightModule,
+    FormsModule,
     StoreModule.forRoot(
       {
         user: userReducer,

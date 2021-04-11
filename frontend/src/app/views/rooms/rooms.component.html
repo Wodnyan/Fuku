@@ -1,5 +1,8 @@
 <main class="container">
   <h1 class="call-to-action">Explore Rooms!</h1>
+  <app-search-rooms
+    (roomsEventEmitter)="onRoomSearch($event)"
+  ></app-search-rooms>
   <button
     *ngIf="isAuth"
     (click)="toggleCreateRoomOverlay()"

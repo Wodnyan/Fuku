@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { API_V1_ENDPOINT } from "src/constants";
@@ -6,6 +6,12 @@ import { API_V1_ENDPOINT } from "src/constants";
 interface RoomDetails {
   name: string;
   description: string;
+}
+interface FetchAllParams {
+  orderBy?: "asc" | "desc";
+  limit?: number;
+  skip?: number;
+  name?: string;
 }
 
 @Injectable({
@@ -16,8 +22,21 @@ export class RoomsService {
 
   constructor(private http: HttpClient) {}
 
-  fetchAllRooms(): Observable<any> {
-    return this.http.get(this.API_ENDPOINT);
+  fetchAllRooms(params?: FetchAllParams): Observable<any> {
+    let temp = new HttpParams();
+
+    if (params !== undefined) {
+      temp = params.name ? temp.append("name", params.name) : temp;
+      temp = params.skip ? temp.append("skip", params.skip.toString()) : temp;
+      temp = params.limit
+        ? temp.append("limit", params.limit.toString())
+        : temp;
+      temp = params.orderBy ? temp.append("orderBy", params.orderBy) : temp;
+    }
+
+    return this.http.get(this.API_ENDPOINT, {
+      params: temp,
+    });
   }
 
   fetchOneRoom(id: number): Observable<any> {

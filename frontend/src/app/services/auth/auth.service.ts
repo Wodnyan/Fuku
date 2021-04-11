@@ -25,7 +25,7 @@ export class AuthService {
     credentials: SignUpCredentials
   ): Observable<{ accessToken: keyof Tokens }> {
     return this.http.post<any>(
-      `${API_V1_ENDPOINT}/users/auth/register`,
+      `${API_V1_ENDPOINT}/auth/register`,
       credentials,
       {
         withCredentials: true,
@@ -34,17 +34,13 @@ export class AuthService {
   }
 
   login(credentials: LoginCredentials): Observable<{ accessToken: string }> {
-    return this.http.post<any>(
-      `${API_V1_ENDPOINT}/users/auth/login`,
-      credentials,
-      {
-        withCredentials: true,
-      }
-    );
+    return this.http.post<any>(`${API_V1_ENDPOINT}/auth/login`, credentials, {
+      withCredentials: true,
+    });
   }
 
   fetchUserInfo(): Observable<{ user?: User }> {
-    return this.http.get(`${API_V1_ENDPOINT}/users/auth/check`, {
+    return this.http.get(`${API_V1_ENDPOINT}/auth/check`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

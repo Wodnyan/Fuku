@@ -11,10 +11,12 @@ import { Room, User } from "src/types";
   styleUrls: ["./rooms.component.scss"],
 })
 export class RoomsComponent implements OnInit {
-  rooms: Room[] | [];
-  createRoomOverlay = false;
+  rooms: Room[] | [] = [];
+
   user$: Observable<User | null>;
   isAuth = false;
+
+  createRoomOverlay = false;
 
   constructor(
     private roomsService: RoomsService,
@@ -24,14 +26,17 @@ export class RoomsComponent implements OnInit {
     this.user$ = store.select("user");
   }
 
+  onRoomSearch(rooms: any) {
+    this.rooms = rooms;
+  }
+
   ngOnInit(): void {
-    this.user$.subscribe(() => {
-      this.isAuth = true;
+    this.user$.subscribe((user) => {
+      this.isAuth = user ? true : false;
     });
     this.nav.show();
     this.roomsService.fetchAllRooms().subscribe(
       (data) => {
-        console.log(data.rooms);
         this.rooms = data.rooms;
       },
       (error) => console.log(error)
